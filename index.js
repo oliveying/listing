@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 
+const read = require('node-readability');
 const app = express();
 
 const Article = require('./modules/db').Article;
@@ -21,6 +22,16 @@ app.get('/articles', (req,res, next) => {
 })
 
 app.post('/articles', (req,res, next) => {
+  const url = req.body.url;
+  read(url, (err, result)=> {
+    if (err || !result) res.status(500).send('error downloading article');
+
+    Article.create({title: result.title, content: result.content},
+      (err, article) => {
+        if (err) return next(err);
+        res.send('OK'); // 文章保存成功后，发送状态码为200的响应
+      })
+  });
   const article = { title: req.body.title };
   articles.push(article);
   res.send(article);
