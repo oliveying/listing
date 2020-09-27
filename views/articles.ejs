@@ -1,0 +1,15 @@
+<% include('../view/component/head.ejs') %>
+<ul>
+  hello this is hhh
+  <% articles.forEach((article)=> {%>
+    <li>
+      <a href="/articles/<%= article.id %>">
+      <%= article.title %>
+      
+      </a>
+    </li>
+    
+  <% }) %> 
+</ul>
+<% include('../view/component/foot.ejs') %>
+

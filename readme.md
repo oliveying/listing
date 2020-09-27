@@ -20,3 +20,32 @@ controllers/ 或routes/ http请求处理器
 
 middleware 中间件组件
 
+## npm 运行脚本
+
+通常node server.js 是默认的start命令，所以在package.json的script里可以省略，前提是必须要有server.js
+
+比如选了Mocha来做测试，并且已经用npm install --save-dev 装好来，如果在package.json中添加下面的语句，就不用全局安装了
+```json
+{
+  ...
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/*.js"
+  }
+}
+```
+
+这个例子中的参数传给了mocha，也可以在运行npm脚本时用两个连字符传入参数：
+```bash
+npm testo -- test/*.js
+```
+
+## npm 常用命令
+
+* start,  启动web应用服务器
+* stop,  停掉web应用服务器
+* restart, 运行stop，然后运行restart
+* install , postinstall 在安装了包之后运行本地构建命令。注意，postinstall只能通过npm *run* postinstall运行
+
+还有发布包之前清理命令
+
+以及用于包迁移时前置/后置命令

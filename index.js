@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-
 const read = require('node-readability');
 const app = express();
 
@@ -19,7 +18,6 @@ app.get('/', (req,res) => {
 app.get('/articles', (req,res, next) => {
   Article.all((err, articles) => {
     if (err) return next(err);
-
     res.format({
       html: ()=> {
         res.render('articles.ejs', {
@@ -30,7 +28,6 @@ app.get('/articles', (req,res, next) => {
         res.send(articles);
       }
     })
-    res.send(articles);
   })
 })
 
@@ -45,9 +42,6 @@ app.post('/articles', (req,res, next) => {
         res.send('OK'); // 文章保存成功后，发送状态码为200的响应
       })
   });
-  const article = { title: req.body.title };
-  articles.push(article);
-  res.send(article);
 })
 
 app.get('/articles/:id', (req,res, next) => {

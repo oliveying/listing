@@ -1,10 +1,10 @@
 const sqlite3 = require('sqlite3').verbose();
-const dbName = "later.sqlite";
+const dbName = "later.sqlite1";
 
 const db = new sqlite3.Database(dbName); // 连接到一个数据库文件
 
 db.serialize(()=> {
-  const sql = `CREATE TABLE IF NOT EXISTS articles(id integer primary key, title, conent TEXT)`;
+  const sql = `CREATE TABLE IF NOT EXISTS articles(id integer primary key, title TEXT, content TEXT)`;
   db.run(sql); // 如果还没有， 创建一个‘articles’表
 })
 
