@@ -9,6 +9,8 @@ app.set('port', process.env.PORT || 3000)
 
 app.use(bodyparser.json()); // 支持编码为json的消息请求消息体
 app.use(bodyparser.urlencoded({extended: true})); // 支持编码为表单的请求消息体
+
+app.use('./css/bootstrap.css', express.static('node_modules/bootstrap/dist/css/bootstrap.css'))
 // const articles = [{title: "example"}]
 app.get('/', (req,res) => {
   res.send('hello world')
@@ -17,6 +19,17 @@ app.get('/', (req,res) => {
 app.get('/articles', (req,res, next) => {
   Article.all((err, articles) => {
     if (err) return next(err);
+
+    res.format({
+      html: ()=> {
+        res.render('articles.ejs', {
+          articles: articles,
+        })
+      },
+      json: ()=> {
+        res.send(articles);
+      }
+    })
     res.send(articles);
   })
 })
