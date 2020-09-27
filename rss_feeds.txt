@@ -1,1 +1,2 @@
 http://dave.smallpict.com/rss.xml
+https://nodejs.org/en/feed/blog.xml
